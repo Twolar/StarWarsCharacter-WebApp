@@ -17,7 +17,6 @@ public class CharactersController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCharacters()
     {
-        // TODO: Build this out more...
         var characters = await _characterRepository.GetCharacters();
 
         return Ok(characters);

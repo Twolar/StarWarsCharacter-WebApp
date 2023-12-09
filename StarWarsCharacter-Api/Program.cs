@@ -1,10 +1,12 @@
 using StarWarsCharacter_Api.Data;
+using StarWarsCharacter_Api.Helpers;
 using StarWarsCharacter_Api.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
 builder.Services.AddScoped<ICharacterRepository, StarWarsCharacterRepository>();
+builder.Services.AddScoped<ICharacterMapper, CharacterMapper>();
 
 // Controllers
 builder.Services.AddControllers();

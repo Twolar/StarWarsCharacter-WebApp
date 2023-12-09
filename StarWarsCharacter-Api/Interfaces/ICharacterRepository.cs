@@ -1,6 +1,9 @@
-﻿namespace StarWarsCharacter_Api.Interfaces;
+﻿using StarWarsCharacter_Api.Models;
 
-public interface ICharacterRepository {
-    Task<List<object>> GetCharacters();
-    Task<object> GetCharacter(int id);
+namespace StarWarsCharacter_Api.Interfaces;
+
+public interface ICharacterRepository
+{
+    Task<IList<Character>> GetCharacters();
+    Task<Character> GetCharacter(int id);
 }
