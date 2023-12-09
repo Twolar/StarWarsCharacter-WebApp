@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StarWarsCharacter_Api.Interfaces;
 
 namespace StarWarsCharacter_Api.Controllers;
 
@@ -6,28 +7,18 @@ namespace StarWarsCharacter_Api.Controllers;
 [Route("[controller]")]
 public class CharactersController : ControllerBase
 {
-    public CharactersController() { }
+    private readonly ICharacterRepository _characterRepository;
+
+    public CharactersController(ICharacterRepository characterRepository)
+    {
+        _characterRepository = characterRepository;
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetCharacters()
     {
-        var characters = new List<object> {
-            new {
-                Name = "TestName1",
-                Type = "Jedi",
-                LightSaberColor = "Blue"
-            },
-            new {
-                Name = "TestName2",
-                Type = "Sith",
-                LightSaberColor = "Red"
-            },
-            new {
-                Name = "TestName3",
-                Type = "Jedi",
-                LightSaberColor = "Green"
-            },
-        };
+        // TODO: Build this out more...
+        var characters = await _characterRepository.GetCharacters();
 
         return Ok(characters);
     }
@@ -35,12 +26,7 @@ public class CharactersController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCharacter(int id)
     {
-        var character = new
-        {
-            Name = "TestName2",
-            Type = "Sith",
-            LightSaberColor = "Red"
-        };
+        var character = await _characterRepository.GetCharacter(id);
 
         return Ok(character);
     }
