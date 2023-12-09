@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsCharacter-Api", "StarWarsCharacter-Api\StarWarsCharacter-Api.csproj", "{D18385BA-B527-4DD0-9E55-A37557A68FA2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsCharacter-Api-UnitTests", "StarWarsCharacter-Api-UnitTests\StarWarsCharacter-Api-UnitTests.csproj", "{111D86E5-D292-4C0D-A946-37AE0253AC99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarWarsCharacter-Api-IntegrationTests", "StarWarsCharacter-Api-IntegrationTests\StarWarsCharacter-Api-IntegrationTests.csproj", "{8DF34FE4-8890-4D3A-9D84-EBAB492A8084}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D18385BA-B527-4DD0-9E55-A37557A68FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D18385BA-B527-4DD0-9E55-A37557A68FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D18385BA-B527-4DD0-9E55-A37557A68FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D18385BA-B527-4DD0-9E55-A37557A68FA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{111D86E5-D292-4C0D-A946-37AE0253AC99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{111D86E5-D292-4C0D-A946-37AE0253AC99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{111D86E5-D292-4C0D-A946-37AE0253AC99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{111D86E5-D292-4C0D-A946-37AE0253AC99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DF34FE4-8890-4D3A-9D84-EBAB492A8084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DF34FE4-8890-4D3A-9D84-EBAB492A8084}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DF34FE4-8890-4D3A-9D84-EBAB492A8084}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DF34FE4-8890-4D3A-9D84-EBAB492A8084}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
