@@ -7,6 +7,8 @@ namespace StarWarsCharacter_Api.Data;
 
 public class StarWarsCharacterRepository : ICharacterRepository
 {
+    // TODO: Add basic logging?
+    
     private readonly ICharacterMapper _characterMapper;
     private readonly HttpClient _client;
     private const string _baseUrl = "https://swapi.dev/api";
