@@ -8,6 +8,8 @@ namespace StarWarsCharacter_Api.Controllers;
 [Route("[controller]")]
 public class CharactersController : ControllerBase
 {
+    // TODO: Add basic logging?
+    
     private readonly ICharacterRepository _characterRepository;
 
     public CharactersController(ICharacterRepository characterRepository)
