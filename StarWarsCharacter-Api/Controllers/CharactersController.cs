@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using StarWarsCharacter_Api.Helpers;
 using StarWarsCharacter_Api.Interfaces;
 
 namespace StarWarsCharacter_Api.Controllers;
@@ -17,16 +18,57 @@ public class CharactersController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCharacters()
     {
-        var characters = await _characterRepository.GetCharacters();
+        try
+        {
+            var characters = await _characterRepository.GetCharacters();
 
-        return Ok(characters);
+            return Ok(characters);
+        }
+        catch (SWCApiException swcae)
+        {
+            return StatusCode((int)swcae.HttpStatusCode, new
+            {
+                message = swcae.Message,
+            });
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, new
+            {
+                message = e.Message
+            });
+        }
     }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCharacter(int id)
     {
-        var character = await _characterRepository.GetCharacter(id);
+        try
+        {
+            var character = await _characterRepository.GetCharacter(id);
 
-        return Ok(character);
+            return Ok(character);
+        }
+        catch (KeyNotFoundException knfe)
+        {
+            return NotFound(new
+            {
+                message = knfe.Message
+            });
+        }
+        catch (SWCApiException swcae)
+        {
+            return StatusCode((int)swcae.HttpStatusCode, new
+            {
+                message = swcae.Message,
+            });
+        }
+        catch (Exception e)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, new
+            {
+                message = e.Message
+            });
+        }
     }
 }

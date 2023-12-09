@@ -5,7 +5,7 @@ namespace StarWarsCharacter_Api.Helpers;
 
 public class CharacterMapper : ICharacterMapper
 {
-    public async Task<Character> Map(SwapiPersonDTO characterDTO)
+    public Character Map(SwapiPersonDTO characterDTO)
     {
         int newIntId;
         int? id = null;
@@ -43,13 +43,13 @@ public class CharacterMapper : ICharacterMapper
         };
     }
 
-    public async Task<IList<Character>> MapMulitple(IList<SwapiPersonDTO> characterDTOs)
+    public IList<Character> MapMulitple(IList<SwapiPersonDTO> characterDTOs)
     {
         var characters = new List<Character>();
 
         foreach (SwapiPersonDTO characterDTO in characterDTOs)
         {
-            characters.Add(await Map(characterDTO));
+            characters.Add(Map(characterDTO));
         }
 
         return characters;

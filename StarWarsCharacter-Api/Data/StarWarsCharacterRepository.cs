@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using StarWarsCharacter_Api.Helpers;
 using StarWarsCharacter_Api.Interfaces;
 using StarWarsCharacter_Api.Models;
 
@@ -12,7 +13,6 @@ public class StarWarsCharacterRepository : ICharacterRepository
     private JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
     {
         PropertyNameCaseInsensitive = true,
-
     };
 
     public StarWarsCharacterRepository(ICharacterMapper characterMapper)
@@ -39,7 +39,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
                 // -- i.e. deserializing each character and mapping them is big overhead.
 
                 var response = await _client.GetAsync(nextApiPage);
-                response.EnsureSuccessStatusCode(); // TODO: Change so that proper HTTP response is returned i.e. no content etc
+                ExternalApiResponseChecker.CheckResponseStatusCode(response);
 
                 var contentJsonString = await response.Content.ReadAsStringAsync();
 
@@ -47,7 +47,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
 
                 if (responseObject == null)
                 {
-                    throw new ArgumentNullException($"{nameof(responseObject)} was null.");
+                    throw new InvalidOperationException($"{nameof(responseObject)} was null.");
                 }
 
                 if (responseObject.Results != null)
@@ -58,11 +58,11 @@ public class StarWarsCharacterRepository : ICharacterRepository
                 nextApiPage = responseObject.Next;
             }
 
-            var mappedCharacters = await _characterMapper.MapMulitple(characterDTOs);
+            var mappedCharacters = _characterMapper.MapMulitple(characterDTOs);
 
             return mappedCharacters;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // Log exception
             throw;
@@ -74,7 +74,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
         try
         {
             var response = await _client.GetAsync(_baseUrl + $"/people/{id}");
-            response.EnsureSuccessStatusCode(); // TODO: Change so that proper HTTP response is returned i.e. not found etc
+            ExternalApiResponseChecker.CheckResponseStatusCode(response);
 
             var contentJsonString = await response.Content.ReadAsStringAsync();
 
@@ -82,14 +82,14 @@ public class StarWarsCharacterRepository : ICharacterRepository
 
             if (characterDTO == null)
             {
-                throw new ArgumentNullException($"{nameof(characterDTO)} was null.");
+                throw new InvalidOperationException($"{nameof(characterDTO)} was null.");
             }
 
-            var character = await _characterMapper.Map(characterDTO);
+            var character = _characterMapper.Map(characterDTO);
 
             return character;
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // Log exception
             throw;
