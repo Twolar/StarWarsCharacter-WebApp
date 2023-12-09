@@ -49,7 +49,8 @@ public class CharacterMapper : ICharacterMapper
 
         foreach (SwapiPersonDTO characterDTO in characterDTOs)
         {
-            characters.Add(Map(characterDTO));
+            var character = Map(characterDTO);
+            characters.Add(character);
         }
 
         return characters;
