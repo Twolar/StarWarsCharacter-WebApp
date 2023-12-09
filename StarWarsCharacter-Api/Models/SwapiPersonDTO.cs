@@ -1,6 +1,6 @@
 ﻿namespace StarWarsCharacter_Api.Models;
 
-public class SwapiCharacterDTO
+public class SwapiPersonDTO
 {
     public string? birth_year { get; set; }
     public string? eye_color { get; set; }

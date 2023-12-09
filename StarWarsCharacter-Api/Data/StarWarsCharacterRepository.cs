@@ -9,6 +9,11 @@ public class StarWarsCharacterRepository : ICharacterRepository
     private readonly ICharacterMapper _characterMapper;
     private readonly HttpClient _client;
     private const string _baseUrl = "https://swapi.dev/api";
+    private JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
+    {
+        PropertyNameCaseInsensitive = true,
+
+    };
 
     public StarWarsCharacterRepository(ICharacterMapper characterMapper)
     {
@@ -25,22 +30,37 @@ public class StarWarsCharacterRepository : ICharacterRepository
     {
         try
         {
-            var response = await _client.GetAsync(_baseUrl + "/people");
-            response.EnsureSuccessStatusCode();
+            var characterDTOs = new List<SwapiPersonDTO>();
+            var nextApiPage = _baseUrl + "/people";
 
-            var contentJsonString = await response.Content.ReadAsStringAsync();
+            while (!string.IsNullOrEmpty(nextApiPage))
+            {
+                // TODO: Future - If have time, look at improving the performance of this, as we do not need all of the character details here?
+                // -- i.e. deserializing each character and mapping them is big overhead.
 
-            // TODO: Need to account for other properties in the response too (i.e. next etc for pagination)
-            List<SwapiCharacterDTO> swapiCharacterDTOs = JsonSerializer.Deserialize<List<SwapiCharacterDTO>>(contentJsonString);
+                var response = await _client.GetAsync(nextApiPage);
+                response.EnsureSuccessStatusCode(); // TODO: Change so that proper HTTP response is returned i.e. no content etc
 
-            // TODO: Check if DTOS are null
+                var contentJsonString = await response.Content.ReadAsStringAsync();
 
-            var characters = await _characterMapper.MapMulitple(swapiCharacterDTOs);
-            // TODO: Handle response with:
-            // -- Need loop to handle api pagination
-            // -- Map data to object list to be returned i.e. create character model?
+                var responseObject = JsonSerializer.Deserialize<SwapiPeopleHeaderDTO>(contentJsonString, _jsonSerializerOptions);
 
-            return characters;
+                if (responseObject == null)
+                {
+                    throw new ArgumentNullException($"{nameof(responseObject)} was null.");
+                }
+
+                if (responseObject.Results != null)
+                {
+                    characterDTOs.AddRange(responseObject.Results);
+                }
+
+                nextApiPage = responseObject.Next;
+            }
+
+            var mappedCharacters = await _characterMapper.MapMulitple(characterDTOs);
+
+            return mappedCharacters;
         }
         catch (Exception e)
         {
@@ -54,16 +74,18 @@ public class StarWarsCharacterRepository : ICharacterRepository
         try
         {
             var response = await _client.GetAsync(_baseUrl + $"/people/{id}");
-            response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode(); // TODO: Change so that proper HTTP response is returned i.e. not found etc
 
             var contentJsonString = await response.Content.ReadAsStringAsync();
 
-            // TODO: Need to account for other properties in the response too (i.e. next etc for pagination)
-            List<SwapiCharacterDTO> swapiCharacterDTOs = JsonSerializer.Deserialize<List<SwapiCharacterDTO>>(contentJsonString);
+            var characterDTO = JsonSerializer.Deserialize<SwapiPersonDTO>(contentJsonString, _jsonSerializerOptions);
 
-            // TODO: Check if DTOS are null
+            if (characterDTO == null)
+            {
+                throw new ArgumentNullException($"{nameof(characterDTO)} was null.");
+            }
 
-            var character = await _characterMapper.Map(swapiCharacterDTOs.First());
+            var character = await _characterMapper.Map(characterDTO);
 
             return character;
         }

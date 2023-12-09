@@ -4,6 +4,6 @@ namespace StarWarsCharacter_Api.Interfaces;
 
 public interface ICharacterMapper
 {
-    Task<Character> Map(SwapiCharacterDTO characterDTO);
-    Task<IList<Character>> MapMulitple(IList<SwapiCharacterDTO> characterDTOs);
+    Task<Character> Map(SwapiPersonDTO characterDTO);
+    Task<IList<Character>> MapMulitple(IList<SwapiPersonDTO> characterDTOs);
 }
