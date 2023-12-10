@@ -8,7 +8,7 @@ To get a local copy with dev running locally
 ### Prerequisites
 
 NPM installed and setup
-Latest Node installed and setup
+Node installed and setup
 ASP.NET7 Runtime and SDK
 
 ### Get Started Instructions
@@ -22,6 +22,3 @@ For the React Client:
 1. In your terminal, navigate to the directory "/StarWarsCharacter-Client"
 2. Install packages with "npm install"
 3. To run the client "npm run dev" _(Client is now served on http://localhost:7501/, and terminate it via 'control + c')_
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
