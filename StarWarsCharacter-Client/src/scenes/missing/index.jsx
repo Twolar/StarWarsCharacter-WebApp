@@ -22,7 +22,11 @@ const Missing = () => {
       </Box>
 
       <Box display="flex" justifyContent="start" mt="20px">
-        <Button onClick={() => navigate("/")} color="secondary" variant="contained">
+        <Button
+          onClick={() => navigate("/")}
+          color="secondary"
+          variant="contained"
+        >
           Back to Home
         </Button>
       </Box>
