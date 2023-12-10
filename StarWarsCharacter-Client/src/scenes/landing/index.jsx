@@ -12,7 +12,9 @@ const Landing = () => {
     >
       <Box textAlign="center">
         <Typography variant="h3">Welcome</Typography>
-        <Typography variant="p">Check out the characters below</Typography>
+        <Typography variant="p">
+          Check out the StarWars characters below
+        </Typography>
       </Box>
 
       <Box mt={5}>

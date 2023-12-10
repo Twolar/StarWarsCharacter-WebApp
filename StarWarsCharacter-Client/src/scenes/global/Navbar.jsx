@@ -1,6 +1,9 @@
 import { Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <Box
       display="flex"
@@ -10,7 +13,7 @@ const Navbar = () => {
       marginBottom={2}
       boxShadow={1}
     >
-      <Typography>
+      <Typography onClick={() => navigate("/")} style={{ cursor: "pointer" }}>
         <img
           src="/r2d2.svg"
           alt="R2D2 Icon"
