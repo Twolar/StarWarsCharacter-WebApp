@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import StarWarsCharacters from "../../components/starWarsCharacters";
 
 const Landing = () => {
   return (
@@ -13,8 +14,8 @@ const Landing = () => {
         <Typography variant="h3">Welcome</Typography>
       </Box>
 
-      <Box>
-        <p>This is the landing page, more content to come here soon...</p>
+      <Box mt={5}>
+        <StarWarsCharacters />
       </Box>
     </Box>
   );
