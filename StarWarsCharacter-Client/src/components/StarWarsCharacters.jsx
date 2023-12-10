@@ -3,8 +3,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, Grid } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const StarWarsCharacters = () => {
+  const navigate = useNavigate();
   const [characters, setCharacters] = useState([
     {
       id: 1,
@@ -43,13 +45,10 @@ const StarWarsCharacters = () => {
               height: "100%",
             }}
           >
-            <CardActionArea sx={{ height: "100%" }}>
+            <CardActionArea sx={{ height: "100%" }} onClick={() => navigate(`/characters/${character.id}`)}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
                   {character.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {character.blurb}
                 </Typography>
               </CardContent>
             </CardActionArea>
