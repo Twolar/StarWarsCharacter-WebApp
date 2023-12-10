@@ -51,9 +51,9 @@ const Characters = () => {
         </Box>
       </Box>
 
-      <Box mt={5}>
+      <Box mt={5} sx={{ width: { xs: "100%", sm: "85%", md: "75%" }, textAlign: "center" }}>
         {isLoading ? (
-          <>Searching...</>
+          <>Loading...</>
         ) : isApiError ? (
           <>Oops, looks like there was an error.</>
         ) : (

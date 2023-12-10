@@ -1,11 +1,10 @@
 import { Box, Typography, Card, CardContent, Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "../../api/axios";
 
 const CharacterProfile = () => {
   let { characterId } = useParams();
-  let navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [isApiError, setIsApiError] = useState(false);
   const [character, setCharacter] = useState({});
@@ -39,7 +38,9 @@ const CharacterProfile = () => {
       <Box textAlign="center">
         {isLoading ? (
           <>Loading...</>
-        ) : !isApiError ? (
+        ) : isApiError ? (
+          <>Sorry this character does not exist, or there was an error.</>
+        ) : (
           <>
             <Typography variant="h3">{character.name}</Typography>
             <Card
@@ -76,18 +77,7 @@ const CharacterProfile = () => {
               </CardContent>
             </Card>
           </>
-        ) : (
-          <>Sorry this character does not exist, or there was an error.</>
         )}
-      </Box>
-      <Box display="flex" justifyContent="start" mt="20px">
-        <Button
-          onClick={() => navigate("/characters")}
-          color="secondary"
-          variant="contained"
-        >
-          See all characters
-        </Button>
       </Box>
     </Box>
   );
