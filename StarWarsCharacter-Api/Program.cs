@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container
 builder.Services.AddScoped<ICharacterRepository, StarWarsCharacterRepository>();
 builder.Services.AddScoped<ICharacterMapper, CharacterMapper>();
+builder.Services.AddHttpClient();
 
 // Controllers
 builder.Services.AddControllers();
