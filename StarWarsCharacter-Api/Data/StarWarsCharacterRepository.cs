@@ -8,7 +8,7 @@ namespace StarWarsCharacter_Api.Data;
 public class StarWarsCharacterRepository : ICharacterRepository
 {
     // TODO: Add basic logging?
-    
+
     private readonly ICharacterMapper _characterMapper;
     private readonly HttpClient _client;
     private const string _baseUrl = "https://swapi.dev/api";
@@ -28,12 +28,12 @@ public class StarWarsCharacterRepository : ICharacterRepository
         _client.Dispose();
     }
 
-    public async Task<IList<Character>> GetCharacters()
+    public async Task<IList<Character>> GetCharacters(string searchExtension = "")
     {
         try
         {
             var characterDTOs = new List<SwapiPersonDTO>();
-            var nextApiPage = _baseUrl + "/people";
+            var nextApiPage = $"{_baseUrl}/people{searchExtension}";
 
             while (!string.IsNullOrEmpty(nextApiPage))
             {
@@ -71,6 +71,17 @@ public class StarWarsCharacterRepository : ICharacterRepository
             // Log exception
             throw;
         }
+    }
+
+    public async Task<IList<Character>> GetCharacters()
+    {
+        return await GetCharacters("");
+    }
+
+    public async Task<IList<Character>> SearchCharacters(string searchValue)
+    {
+        var searchExtension = $"/?search={searchValue}";
+        return await GetCharacters(searchExtension);
     }
 
     public async Task<Character> GetCharacter(int id)
