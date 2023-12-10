@@ -10,8 +10,9 @@ const Landing = () => {
       justifyContent="center"
       alignItems="center"
     >
-      <Box>
+      <Box textAlign="center">
         <Typography variant="h3">Welcome</Typography>
+        <Typography variant="p">Check out the characters below</Typography>
       </Box>
 
       <Box mt={5}>

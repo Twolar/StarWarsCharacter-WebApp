@@ -8,6 +8,7 @@ const Missing = () => {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      textAlign="center"
     >
       <Box>
         <Typography variant="h3">404</Typography>
