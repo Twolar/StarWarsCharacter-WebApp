@@ -22,15 +22,6 @@ const CharacterSearch = () => {
       <Box mt={5}>
         <StarWarsCharacterSearch />
       </Box>
-      <Box display="flex" justifyContent="start" mt="20px">
-        <Button
-          onClick={() => navigate("/characters")}
-          color="secondary"
-          variant="contained"
-        >
-          See all characters
-        </Button>
-      </Box>
     </Box>
   );
 };
