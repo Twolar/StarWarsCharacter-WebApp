@@ -1,10 +1,7 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import StarWarsCharacterSearch from "../../components/StarWarsCharacterSearch";
-import { useNavigate } from "react-router-dom";
 
 const CharacterSearch = () => {
-  const navigate = useNavigate();
-
   return (
     <Box
       m="0px 20px"
@@ -19,7 +16,7 @@ const CharacterSearch = () => {
           Search for a character by name in the box below
         </Typography>
       </Box>
-      <Box mt={5}>
+      <Box mt={5} sx={{ width: { xs: "100%", sm: "85%", md: "75%" } }}>
         <StarWarsCharacterSearch />
       </Box>
     </Box>

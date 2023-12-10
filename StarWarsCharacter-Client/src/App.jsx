@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Missing from "./scenes/missing";
 import Navbar from "./scenes/global/Navbar";
-import Landing from "./Scenes/landing";
+import Characters from "./scenes/characters";
 import CharacterProfile from "./scenes/characterProfile";
 import CharacterSearch from "./scenes/characterSearch";
 
@@ -12,8 +12,8 @@ function App() {
         <main className="content">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/Characters" element={<Landing />} />
+            <Route path="/" element={<Characters />} />
+            <Route path="/Characters" element={<Characters />} />
             <Route path="/Characters/:characterId" element={<CharacterProfile />} />
             <Route path="/Characters/Search" element={<CharacterSearch />} />
             <Route path="*" element={<Missing />} />
