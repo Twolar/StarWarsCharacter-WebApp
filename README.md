@@ -2,9 +2,9 @@
 
 ### Prerequisites
 
-NPM installed and setup
-Node installed and setup
-ASP.NET7 Runtime and SDK
+- NPM installed and setup
+- Node installed and setup
+- ASP.NET7 Runtime and SDK
 
 ### Get Started Instructions
 
