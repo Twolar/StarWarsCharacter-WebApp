@@ -3,7 +3,7 @@ using StarWarsCharacter_Api.Models;
 
 namespace StarWarsCharacter_Api.Helpers;
 
-public class CharacterMapper : ICharacterMapper
+public class SwapiCharacterMapper : ISwapiCharacterMapper
 {
     public Character Map(SwapiPersonDTO characterDTO)
     {

@@ -2,7 +2,7 @@
 
 namespace StarWarsCharacter_Api.Interfaces;
 
-public interface ICharacterMapper
+public interface ISwapiCharacterMapper
 {
     Character Map(SwapiPersonDTO characterDTO);
     IList<Character> MapMulitple(IList<SwapiPersonDTO> characterDTOs);

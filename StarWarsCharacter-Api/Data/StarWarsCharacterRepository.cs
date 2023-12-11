@@ -9,7 +9,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
 {
     // TODO: Add basic logging?
 
-    private readonly ICharacterMapper _characterMapper;
+    private readonly ISwapiCharacterMapper _characterMapper;
     private readonly HttpClient _client;
     private const string _baseUrl = "https://swapi.dev/api";
     private JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions
@@ -17,7 +17,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
         PropertyNameCaseInsensitive = true,
     };
 
-    public StarWarsCharacterRepository(ICharacterMapper characterMapper, IHttpClientFactory httpClientFactory)
+    public StarWarsCharacterRepository(ISwapiCharacterMapper characterMapper, IHttpClientFactory httpClientFactory)
     {
         _characterMapper = characterMapper;
         _client = httpClientFactory.CreateClient();
