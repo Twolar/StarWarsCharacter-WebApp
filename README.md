@@ -35,3 +35,8 @@ ASP.NET7 API:
 
 React Frontend:
 - Nothing too special here, just a way of calling and displaying data from the API really.
+
+Testing:
+- Did not get around to writing tests for this unfortunately. 
+- - Would look to add unit and integration tests.
+- - API is setup pretty well in terms of dependency injection so mocking resources for unit testing should be a breeze.
