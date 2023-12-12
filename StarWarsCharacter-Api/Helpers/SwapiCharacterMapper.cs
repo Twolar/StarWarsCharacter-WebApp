@@ -24,6 +24,8 @@ public class SwapiCharacterMapper : ISwapiCharacterMapper
         return new Character()
         {
             Id = id,
+            Url = characterDTO.url,
+            Name = characterDTO.name,
             BirthYear = characterDTO.birth_year,
             EyeColor = characterDTO.eye_color,
             Films = characterDTO.films,
@@ -32,13 +34,11 @@ public class SwapiCharacterMapper : ISwapiCharacterMapper
             Height = characterDTO.height,
             Homeworld = characterDTO.homeworld,
             Mass = characterDTO.mass,
-            Name = characterDTO.name,
             SkinColor = characterDTO.skin_color,
             Created = characterDTO.created,
             Edited = characterDTO.edited,
             Species = characterDTO.species,
             Starships = characterDTO.starships,
-            Url = characterDTO.url,
             Vehicles = characterDTO.vehicles
         };
     }
