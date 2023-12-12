@@ -8,18 +8,19 @@ namespace StarWarsCharacter_Api.Controllers;
 [Route("[controller]")]
 public class CharactersController : ControllerBase
 {
-    // TODO: Add basic logging?
-
+    private readonly ILogger<CharactersController> _logger;
     private readonly ICharacterRepository _characterRepository;
 
-    public CharactersController(ICharacterRepository characterRepository)
+    public CharactersController(ILogger<CharactersController> logger, ICharacterRepository characterRepository)
     {
+        _logger = logger;
         _characterRepository = characterRepository;
     }
 
     [HttpGet]
     public async Task<IActionResult> GetCharacters()
     {
+        _logger.LogDebug("CharactersController::GetCharacters");
         try
         {
             var characters = await _characterRepository.GetCharacters();
@@ -45,6 +46,7 @@ public class CharactersController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetCharacter(int id)
     {
+        _logger.LogDebug("CharactersController::GetCharacter");
         try
         {
             var character = await _characterRepository.GetCharacter(id);
@@ -78,6 +80,7 @@ public class CharactersController : ControllerBase
     [Route("[action]")]
     public async Task<IActionResult> Search(CharacterSearchRequestModel model)
     {
+        _logger.LogDebug("CharactersController::Search");
         try
         {
             var characters = await _characterRepository.SearchCharacters(model.SearchValue!);

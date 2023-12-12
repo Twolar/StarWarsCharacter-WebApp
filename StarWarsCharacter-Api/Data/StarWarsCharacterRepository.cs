@@ -7,8 +7,7 @@ namespace StarWarsCharacter_Api.Data;
 
 public class StarWarsCharacterRepository : ICharacterRepository
 {
-    // TODO: Add basic logging?
-
+    private readonly ILogger<StarWarsCharacterRepository> _logger;
     private readonly ISwapiCharacterMapper _characterMapper;
     private readonly HttpClient _client;
     private const string _baseUrl = "https://swapi.dev/api";
@@ -17,8 +16,9 @@ public class StarWarsCharacterRepository : ICharacterRepository
         PropertyNameCaseInsensitive = true,
     };
 
-    public StarWarsCharacterRepository(ISwapiCharacterMapper characterMapper, IHttpClientFactory httpClientFactory)
+    public StarWarsCharacterRepository(ILogger<StarWarsCharacterRepository> logger, ISwapiCharacterMapper characterMapper, IHttpClientFactory httpClientFactory)
     {
+        _logger = logger;
         _characterMapper = characterMapper;
         _client = httpClientFactory.CreateClient();
     }
@@ -30,6 +30,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
 
     public async Task<IList<Character>> GetCharacters(string searchExtension = "")
     {
+        _logger.LogDebug("StarWarsCharacterRepository::GetCharacters(string searchExtension = '')");
         try
         {
             var characterDTOs = new List<SwapiPersonDTO>();
@@ -66,26 +67,29 @@ public class StarWarsCharacterRepository : ICharacterRepository
 
             return mappedCharacters;
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            // Log exception
+            _logger.LogDebug("StarWarsCharacterRepository::GetCharacters(string searchExtension = '') encountered an exception", e);
             throw;
         }
     }
 
     public async Task<IList<Character>> GetCharacters()
     {
+        _logger.LogDebug("StarWarsCharacterRepository::GetCharacters()");
         return await GetCharacters("");
     }
 
     public async Task<IList<Character>> SearchCharacters(string searchValue)
     {
+        _logger.LogDebug("StarWarsCharacterRepository::SearchCharacters()");
         var searchExtension = $"/?search={searchValue}";
         return await GetCharacters(searchExtension);
     }
 
     public async Task<Character> GetCharacter(int id)
     {
+        _logger.LogDebug("StarWarsCharacterRepository::GetCharacter()");
         try
         {
             var response = await _client.GetAsync(_baseUrl + $"/people/{id}");
@@ -104,9 +108,9 @@ public class StarWarsCharacterRepository : ICharacterRepository
 
             return character;
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            // Log exception
+             _logger.LogDebug("StarWarsCharacterRepository::GetCharacter() encountered an exception", e);
             throw;
         }
     }
