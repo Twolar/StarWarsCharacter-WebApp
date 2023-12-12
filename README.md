@@ -29,6 +29,7 @@ ASP.NET7 API:
 - The structure of the API is Controller -> Repository. 
 - Controller to handle HTTP Request/Response and the Repository is what provides the data.
 - The repository in this case in essentially a "proxy" for the StarWarsApi, but have tried to stay decoupled from it's domain models by using Data Transfer Objects (DTOs). Features a simple mapper to convert from the SwapiPersonDTO to this api's Character domain model.
+- Would probably look to refactor the PersonDTO to Character mapping to be outside of the repository and in a new layer called service. So that the repository sole reponsibility would be to get the People then let the service handle validation/mapping.
 - Use of interfaces and dependency injection/inversion to help with any future changes and testibility.
 - Very basic and simple error handling and logging included.
 - Performance is not great for GetCharacters, mainly due to deserialization and pagination for the external API call. Brief was pretty open ended, so would look to open discussion on this (maybe I have approached this wrong and data could've been persisted to a DB?). Not sure, anyhow have left some comments with some potential ideas regarding this.
