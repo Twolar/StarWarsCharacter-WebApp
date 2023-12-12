@@ -28,9 +28,9 @@ public class StarWarsCharacterRepository : ICharacterRepository
         _client.Dispose();
     }
 
-    public async Task<IList<Character>> GetCharacters(string searchExtension = "")
+    public async Task<IList<Character>> GetCharacters(string searchExtension)
     {
-        _logger.LogDebug("StarWarsCharacterRepository::GetCharacters('')");
+        _logger.LogDebug("StarWarsCharacterRepository::GetCharacters(searchExtension)");
         try
         {
             var characterDTOs = new List<SwapiPersonDTO>();
@@ -72,7 +72,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
         }
         catch (Exception e)
         {
-            _logger.LogDebug("StarWarsCharacterRepository::GetCharacters('') encountered an exception", e);
+            _logger.LogDebug("StarWarsCharacterRepository::GetCharacters(searchExtension) encountered an exception", e);
             throw;
         }
     }
