@@ -43,13 +43,14 @@ public class StarWarsCharacterRepository : ICharacterRepository
                 // -- i.e. Implement your own pagination as an extension of the SWAPI?
                 // -- i.e. Some sort of caching?
                 // -- i.e. Guess it would depend on further requirements of this application? Who is to be using it and what for etc?
+                // -- Did I miss the brief here, was I supposed to be persisting these to a DB?
 
                 var response = await _client.GetAsync(nextApiPage);
                 ExternalApiResponseChecker.CheckResponseStatusCode(response);
 
                 var contentJsonString = await response.Content.ReadAsStringAsync();
 
-                var responseObject = JsonSerializer.Deserialize<SwapiPeopleHeaderDTO>(contentJsonString, _jsonSerializerOptions);
+                var responseObject = JsonSerializer.Deserialize<SwapiPeopleResponse>(contentJsonString, _jsonSerializerOptions);
 
                 if (responseObject == null)
                 {

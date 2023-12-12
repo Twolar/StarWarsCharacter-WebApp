@@ -1,6 +1,6 @@
 ﻿namespace StarWarsCharacter_Api.Models;
 
-public class SwapiPeopleHeaderDTO
+public class SwapiPeopleResponse
 {
     public int? Count { get; set; }
     public string? Next { get; set; }
