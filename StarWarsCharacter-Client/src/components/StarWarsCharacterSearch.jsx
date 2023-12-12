@@ -38,7 +38,6 @@ const StarWarsCharacterSearch = () => {
   };
 
   const handleSubmit = (e) => {
-    console.log("Searching for: " + searchValue);
     e.preventDefault();
     setIsSearching(true);
     searchCharacters(searchValue);
