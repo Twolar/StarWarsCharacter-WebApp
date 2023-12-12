@@ -30,7 +30,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
 
     public async Task<IList<Character>> GetCharacters(string searchExtension = "")
     {
-        _logger.LogDebug("StarWarsCharacterRepository::GetCharacters(string searchExtension = '')");
+        _logger.LogDebug("StarWarsCharacterRepository::GetCharacters('')");
         try
         {
             var characterDTOs = new List<SwapiPersonDTO>();
@@ -43,6 +43,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
                 // -- i.e. Implement your own pagination as an extension of the SWAPI?
                 // -- i.e. Some sort of caching?
                 // -- i.e. Guess it would depend on further requirements of this application? Who is to be using it and what for etc?
+                // -- i.e. Multithreading the paginated api calls based of the character counts in the response?
                 // -- Did I miss the brief here, was I supposed to be persisting these to a DB?
 
                 var response = await _client.GetAsync(nextApiPage);
@@ -71,7 +72,7 @@ public class StarWarsCharacterRepository : ICharacterRepository
         }
         catch (Exception e)
         {
-            _logger.LogDebug("StarWarsCharacterRepository::GetCharacters(string searchExtension = '') encountered an exception", e);
+            _logger.LogDebug("StarWarsCharacterRepository::GetCharacters('') encountered an exception", e);
             throw;
         }
     }
