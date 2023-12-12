@@ -38,10 +38,11 @@ public class StarWarsCharacterRepository : ICharacterRepository
 
             while (!string.IsNullOrEmpty(nextApiPage))
             {
-                // TODO: Future - If have time, look at improving the performance of this, as we do not need all of the character details here?
-                // -- i.e. Deserializing each character and mapping them is big overhead.
-                // -- i.e. Implement your own version pagination?
-                // -- i.e. Some sort of caching or would it be different if you had your own database to persist to?
+                // TODO: Future - If have time, look at improving the performance of this?
+                // -- i.e. Deserializing each character and mapping them is big overhead. Do we need the whole object?
+                // -- i.e. Implement your own pagination as an extension of the SWAPI?
+                // -- i.e. Some sort of caching?
+                // -- i.e. Guess it would depend on further requirements of this application? Who is to be using it and what for etc?
 
                 var response = await _client.GetAsync(nextApiPage);
                 ExternalApiResponseChecker.CheckResponseStatusCode(response);
